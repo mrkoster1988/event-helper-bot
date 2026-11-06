@@ -1,6 +1,6 @@
 # event-helper-bot 🎮
 
-[![pipeline status](https://gitlab.com/mrkoster/event-helper-bot/badges/main/pipeline.svg)](https://gitlab.com/mrkoster/event-helper-bot/-/commits/main)
+[![CI](https://github.com/mrkoster1988/event-helper-bot/actions/workflows/ci.yml/badge.svg)](https://github.com/mrkoster1988/event-helper-bot/actions/workflows/ci.yml)
 
 Бот-трекер событий игры **Tiles Survive!** для клана: расписание окон,
 гайды по дням, ники и топ игроков. Telegram + VK + MAX.

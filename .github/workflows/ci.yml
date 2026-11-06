@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: Syntax check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Compile all modules
+        run: python -m compileall bot/
+
+      - name: Smoke run (--help)
+        run: python -m bot --help 2>/dev/null || true
+
+  docker-build:
+    name: Docker build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build image
+        run: docker build -t event-helper-bot:${GITHUB_REF_NAME} .
+
+      - name: Save image
+        run: docker save event-helper-bot:${GITHUB_REF_NAME} -o event-helper-bot-${GITHUB_REF_NAME}.tar
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: event-helper-bot-${{ github.ref_name }}
+          path: event-helper-bot-*.tar
+          retention-days: 7
