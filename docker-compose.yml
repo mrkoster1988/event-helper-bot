@@ -1,0 +1,6 @@
+services:
+  event-helper-bot:
+    build: .
+    container_name: event-helper-bot
+    restart: unless-stopped
+    env_file: .env

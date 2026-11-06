@@ -1,0 +1,4 @@
+aiogram>=3.4
+vk-api>=11.9
+schedule>=1.2
+python-dotenv>=1.0
